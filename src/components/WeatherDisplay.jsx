@@ -1,22 +1,5 @@
 import React, { memo } from 'react';
-import { Sun, Cloud, CloudRain, CloudSnow, CloudLightning } from 'lucide-react';
-
-const WeatherIcon = memo(({ condition }) => {
-  switch (condition.toLowerCase()) {
-    case 'clear':
-      return <Sun className='h-12 w-12 text-yellow-400' />;
-    case 'clouds':
-      return <Cloud className='h-12 w-12 text-gray-400' />;
-    case 'rain':
-      return <CloudRain className='h-12 w-12 text-blue-400' />;
-    case 'snow':
-      return <CloudSnow className='h-12 w-12 text-blue-200' />;
-    case 'thunderstorm':
-      return <CloudLightning className='h-12 w-12 text-yellow-600' />;
-    default:
-      return <Cloud className='h-12 w-12 text-gray-400' />;
-  }
-});
+import WeatherIcon from './WeatherIcon'; // Import the new WeatherIcon component
 
 const WeatherDisplay = memo(({ data, city, unit }) => {
   const temperature = unit === 'celsius' ? data.temp_c : data.temp_f;
@@ -25,7 +8,7 @@ const WeatherDisplay = memo(({ data, city, unit }) => {
     <div className='mt-6'>
       <h2 className='text-2xl font-bold text-gray-800'>{city}</h2>
       <div className='flex items-center mt-2'>
-        <WeatherIcon condition={data.condition.text} />
+        <WeatherIcon condition={data.condition.text} size={12} />
         <p className='text-4xl font-bold text-gray-800 ml-4'>
           {Math.round(temperature)}°{unit === 'celsius' ? 'C' : 'F'}
         </p>
